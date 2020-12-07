@@ -20,7 +20,7 @@ public class InsertSort {
                 if(arr[j] < temp) {
                     break;
                 }
-                arr[j+1] = arr[j];
+                arr[j+1] = arr[j];  // element shifts to right
             }
             arr[j+1] = temp;
         }
