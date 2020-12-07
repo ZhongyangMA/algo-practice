@@ -9,4 +9,5 @@ package sort;
  * O(n2) stable
  */
 public class InsertSort {
+    //
 }

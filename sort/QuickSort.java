@@ -9,4 +9,5 @@ package sort;
  * O(n*logn) unstable
  */
 public class QuickSort {
+    //
 }
