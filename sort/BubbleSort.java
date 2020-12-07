@@ -17,6 +17,7 @@ public class BubbleSort {
             return;
         }
 
+        // len-1-i的右边是已排好的范围；左边j的范围是待排区，相邻交换，把大值向右冒泡。
         for(int i = 0; i < arr.length - 1; i++) {
             for(int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j+1]) {

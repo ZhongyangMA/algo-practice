@@ -13,6 +13,8 @@ import java.util.Arrays;
 public class InsertSort {
 
     private static void insertSort(int[] arr) {
+        // i的左边已排好，i是排好区域的最后一个元素；
+        // 检查i+1位置上的元素，用j扫描左边已排好的部分，寻找插入位置。
         for(int i = 0; i < arr.length - 1; i++) {
             int temp = arr[i+1];
             int j = i;

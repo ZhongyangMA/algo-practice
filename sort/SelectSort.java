@@ -14,6 +14,7 @@ public class SelectSort {
 
     private static void selectSort(int[] arr) {
 
+        // len-1-i的右边是已排好的范围；j扫描左边找出最大值替换len-1-i位置上的元素
         for(int i = 0; i < arr.length - 1; i++) {
             int pmax = arr.length - 1 - i;
             for(int j = 0; j < pmax; j++) {
