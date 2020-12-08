@@ -2,6 +2,7 @@ package tree;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -66,7 +67,7 @@ public class BinaryTree {
     public static void levelOrder(TreeNode root){
         if(root == null) return;
 
-        LinkedList<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         TreeNode current = null;
         //1.根节点入队
         queue.offer(root);
