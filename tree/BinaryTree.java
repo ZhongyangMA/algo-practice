@@ -128,7 +128,38 @@ public class BinaryTree {
         System.out.println(res.toString());
     }
 
-    // 倒序层次遍历
+    // 倒序层次遍历 用栈保存每一层
+    public static void bottomLevelOrder(TreeNode root) {
+        if(root == null) return;
+
+        Queue<TreeNode> queue = new LinkedList<>();  //辅助队列
+        TreeNode current = null;  // 记录出队节点
+        List result = new ArrayList();
+
+        //1.根节点入队
+        queue.offer(root);
+        // while循环每次处理一层
+        while (!queue.isEmpty()) {
+            // 记录当前层的尺寸
+            int levelSize = queue.size();
+            // 存储当前层的元素
+            List levelList = new ArrayList();
+            // 扫描当前层
+            for(int i = 0; i < levelSize; i++) {
+                current = queue.poll();
+                levelList.add(current.value);
+                if(current.left != null) {
+                    queue.offer(current.left);
+                }
+                if(current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+            result.add(levelList);
+        }
+        Collections.reverse(result);
+        System.out.println(result.toString());
+    }
 
     // 二叉树深度
     public static int depth(TreeNode root) {
@@ -165,6 +196,9 @@ public class BinaryTree {
         System.out.println("二叉树深度:" + depth(tree));
         // 二叉树节点数
         System.out.println("二叉树节点数:" + countNode(tree));
+        // 倒序层次遍历
+        System.out.println("倒序层次遍历");
+        bottomLevelOrder(tree);
 
     }
 }
