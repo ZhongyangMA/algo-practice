@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -59,7 +61,29 @@ public class BinaryTree {
     }
 
     // 层次遍历
-    public static void levelOrder(TreeNode root){}
+    // 1.先将根节点入队
+    // 2.while(将其出队并打印，若其左子节点不为空将左子入队，若其右子不为空将右子入队)
+    public static void levelOrder(TreeNode root){
+        if(root == null) return;
+
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        TreeNode current = null;
+        //1.根节点入队
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            //2.出队并打印
+            current = queue.poll();
+            System.out.println(current.value);
+            // 若其左子节点不为空 将左子入队
+            if(current.left != null) {
+                queue.offer(current.left);
+            }
+            // 若其右子节点不为空 将右子入队
+            if(current.right != null) {
+                queue.offer(current.right);
+            }
+        }
+    }
 
     // 锯齿形(之字形)层次遍历
     public static void zigzagLevelOrder(TreeNode root) {}
@@ -78,5 +102,8 @@ public class BinaryTree {
         // 先序遍历 压栈法
         System.out.println("先序遍历 压栈法");
         preOrder2(tree);
+        // 层次遍历 队列法
+        System.out.println("层次遍历 队列法");
+        levelOrder(tree);
     }
 }
