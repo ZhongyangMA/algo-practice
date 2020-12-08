@@ -91,7 +91,7 @@ public class BinaryTree {
         Queue<TreeNode> queue = new LinkedList<>();  //辅助队列
         TreeNode current = null;  // 记录出队节点
 
-        boolean levelOrder = true;  // 每层是正序还是逆序
+        boolean direction = true;  // 每层是正序还是逆序
         //1.根节点入队
         queue.offer(root);
         // while循环 每次只扫描一层
@@ -117,13 +117,13 @@ public class BinaryTree {
             }
 
             // 决定正序还是逆序保存
-            if(levelOrder) {
+            if(direction) {
                 res.add(levelList);
             } else {
                 Collections.reverse(levelList);
                 res.add(levelList);
             }
-            levelOrder = !levelOrder;  // 改变方向
+            direction = !direction;  // 改变方向
         }
         System.out.println(res.toString());
     }
