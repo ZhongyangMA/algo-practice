@@ -1,9 +1,6 @@
 package tree;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -87,7 +84,49 @@ public class BinaryTree {
     }
 
     // 锯齿形(之字形)层次遍历
-    public static void zigzagLevelOrder(TreeNode root) {}
+    public static void zigzagLevelOrder(TreeNode root) {
+        if(root == null) return;
+
+        List res = new ArrayList(); // 最终返回结果
+        Queue<TreeNode> queue = new LinkedList<>();  //辅助队列
+        TreeNode current = null;  // 记录出队节点
+
+        boolean levelOrder = true;  // 每层是正序还是逆序
+        //1.根节点入队
+        queue.offer(root);
+        // while循环 每次只扫描一层
+        while (!queue.isEmpty()) {
+
+            // 记录当前层的尺寸
+            int levelSize = queue.size();
+            // 存储当前层的元素
+            List levelList = new ArrayList();
+            // 扫描当前层
+            for(int i = 0; i < levelSize; i++) {
+                // 出队并打印
+                current = queue.poll();
+                levelList.add(current.value);
+                // 若其左子节点不为空 将左子入队
+                if(current.left != null) {
+                    queue.offer(current.left);
+                }
+                // 若其右子节点不为空 将右子入队
+                if(current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+
+            // 决定正序还是逆序保存
+            if(levelOrder) {
+                res.add(levelList);
+            } else {
+                Collections.reverse(levelList);
+                res.add(levelList);
+            }
+            levelOrder = !levelOrder;  // 改变方向
+        }
+        System.out.println(res.toString());
+    }
 
     // 倒序层次遍历
 
@@ -106,5 +145,8 @@ public class BinaryTree {
         // 层次遍历 队列法
         System.out.println("层次遍历 队列法");
         levelOrder(tree);
+        // 锯齿形层次遍历
+        System.out.println("锯齿形层次遍历");
+        zigzagLevelOrder(tree);
     }
 }
