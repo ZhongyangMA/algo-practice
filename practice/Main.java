@@ -4,81 +4,48 @@ import java.util.*;
 
 public class Main {
 
-    public static class Fruit implements Comparable<Fruit> {
-        Integer m;
-        Integer p;
-        boolean visited;
+    public static class Solution {
+        public static int solution(int[] A) {
+            // write your code in Java SE 8
+            int len = A.length;
+            int[] temp1 = new int[len];
+            int[] temp2 = new int[len];
+            int t1 = 0;
+            int t2 = 1;
+            for(int i = 0; i < len; i++) {
+                temp1[i] = t1;
+                temp2[i] = t2;
+                if(t1 == 0) {
+                    t1 = 1;
+                } else {
+                    t1 = 0;
+                }
+                if(t2 == 0) {
+                    t2 = 1;
+                } else {
+                    t2 = 0;
+                }
+            }
+            // temp1 temp2
 
-        public Integer getM() {
-            return m;
-        }
-
-        public void setM(Integer m) {
-            this.m = m;
-        }
-
-        public Integer getP() {
-            return p;
-        }
-
-        public void setP(Integer p) {
-            this.p = p;
-        }
-
-        @Override
-        public String toString() {
-            return "{" + m + ", " + p + ", " + visited + "}";
-        }
-        @Override
-        public int compareTo(Fruit fruit) {
-            return fruit.getP().compareTo(this.getP());
+            int count1 = 0;
+            int count2 = 0;
+            for(int i = 0; i < len; i++) {
+                if(A[i] != temp1[i]) {
+                    count1++;
+                }
+                if(A[i] != temp2[i]) {
+                    count2++;
+                }
+            }
+            return count1 < count2 ? count1 : count2;
         }
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String mArr = sc.nextLine();  // 成本价数组
-        String nArr = sc.nextLine();  // 卖出价数组
-        int k = sc.nextInt();
-
-        String[] m = mArr.split(",");
-        String[] n = nArr.split(",");
-
-        List<Fruit> fruitList = new ArrayList<>();
-        for(int i = 0; i < m.length; i++) {
-            Fruit fruit = new Fruit();
-            fruit.m = Integer.parseInt(m[i]);
-            fruit.p = Integer.parseInt(n[i]) - Integer.parseInt(m[i]);
-            fruit.visited = false;
-            fruitList.add(fruit);
-        }
-        Collections.sort(fruitList);
-        Integer totalP = 0;
-        Integer totalM = 0;
-        while(k > 0) {
-            for (Fruit fruit : fruitList) {
-                if(fruit.visited == false) {
-                    totalM += fruit.getM();
-                    if(totalM > k) {
-                        break;
-                    } else {
-                        totalP += fruit.getP();
-                        fruit.visited = true;
-                    }
-                }
-            }
-            k = k + totalP;
-        }
-
-        System.out.println(totalP);
-
-
-        System.out.println(a);
-        System.out.println(b);
-
-
+        int[] A = {1,0,1,0,1,1};
+        int res = Solution.solution(A);
+        System.out.println(res);
     }
-    static Boolean a;
-    static boolean b;
 
 }

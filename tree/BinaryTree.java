@@ -128,6 +128,39 @@ public class BinaryTree {
         System.out.println(res.toString());
     }
 
+    // 打印每层最右节点
+    public static void levelRightEndNode(TreeNode root) {
+        if(root == null) return;
+
+        List res = new ArrayList(); // 最终返回结果
+        Queue<TreeNode> queue = new LinkedList<>();  //辅助队列
+        TreeNode current = null;  // 记录出队节点
+        queue.offer(root);
+        // while循环 每次只扫描一层
+        while (!queue.isEmpty()) {
+            // 记录当前层的尺寸
+            int levelSize = queue.size();
+            // 存储当前层的元素
+            List levelList = new ArrayList();
+            // 扫描当前层
+            for(int i = 0; i < levelSize; i++) {
+                // 出队并打印
+                current = queue.poll();
+                levelList.add(current.value);
+                // 若其左子节点不为空 将左子入队
+                if(current.left != null) {
+                    queue.offer(current.left);
+                }
+                // 若其右子节点不为空 将右子入队
+                if(current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+            res.add(levelList.get(levelList.size()-1));
+        }
+        System.out.println(res);
+    }
+
     // 倒序层次遍历 用栈保存每一层
     public static void bottomLevelOrder(TreeNode root) {
         if(root == null) return;
@@ -199,6 +232,10 @@ public class BinaryTree {
         // 倒序层次遍历
         System.out.println("倒序层次遍历");
         bottomLevelOrder(tree);
+
+        // 打印每层最右节点
+        System.out.println("打印每层最右节点");
+        levelRightEndNode(tree);
 
     }
 }
