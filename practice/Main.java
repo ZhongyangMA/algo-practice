@@ -1,7 +1,5 @@
 package practice;
 
-import java.util.*;
-
 public class Main {
 
     public static class Solution {
