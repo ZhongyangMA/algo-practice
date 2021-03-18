@@ -34,7 +34,7 @@ public class LinkList {
         System.out.println("null");
     }
 
-    // 链表反转
+    // 链表反转（全部）
     public static Node reverse(Node head) {
         Node pre = null;
         Node cur = head;
@@ -47,10 +47,49 @@ public class LinkList {
         return pre;
     }
 
+    // 链表反转（局部）
+    public static Node reverseBetween(Node head, int left, int right) {
+        // 因为头节点有可能发生变化，使用虚拟头节点可以避免复杂的分类讨论
+        Node dummyNode = new Node(-1);
+        dummyNode.next = head;
+        Node pre = dummyNode;
+
+        // 第 1 步：从虚拟头节点走 left - 1 步，来到 left 节点的前一个节点
+        for(int i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+
+        // 第 2 步：从 pre 再走 right - left + 1 步，来到 right 节点
+        Node rightNode = pre;
+        for (int i = 0; i < right - left + 1; i++) {
+            rightNode = rightNode.next;
+        }
+
+        // 第 3 步：切断出一个子链表（截取链表）
+        Node leftNode = pre.next;
+        Node curr = rightNode.next;
+        // 切断链接
+        pre.next = null;
+        rightNode.next = null;
+
+        // 第 4 步：反转子区间
+        reverse(leftNode);
+        // 第 5 步：接回到原来的链表中
+        pre.next = rightNode;
+        leftNode.next = curr;
+        return dummyNode.next;
+    }
+
     public static void main(String[] args) {
         Node linkList = createLinkList(10);
         printList(linkList);
-        printList(reverse(linkList));
+        Node reversed = reverse(linkList);
+        printList(reversed);
+        Node asc = reverse(reversed);
+        printList(asc);
+
+        Node list = reverseBetween(asc, 4, 6);
+        printList(list);
     }
 
 }
