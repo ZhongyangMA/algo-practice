@@ -33,7 +33,7 @@ public class BigAdd {
             char cur1 = arr1[idx1];
             char cur2 = arr2[idx2];
             // 相加
-            int sum = cur1 - '0' + cur2 - '0';
+            int sum = (cur1 - '0') + (cur2 - '0');  // ascii码之差即为数字字符的值
             // 上一次运算是否有进位
             sum = carry ? sum+1 : sum;
             // 本次是否需要进位
