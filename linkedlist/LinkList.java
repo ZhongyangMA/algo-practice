@@ -80,6 +80,22 @@ public class LinkList {
         return dummyNode.next;
     }
 
+    // 找出倒数第K个节点
+    public static Node findKthToTail(Node head, int k) {
+        //双指针法 p1跑k-1步时 放出p2 p1跑到底时p2指向倒数第k个节点
+        Node p1 = head;
+        Node p2 = head;
+        int count = 1;
+        while(p1.next != null) {
+            p1 = p1.next;
+            count++;
+            if(count > k) {
+                p2 = p2.next;
+            }
+        }
+        return p2;
+    }
+
     public static void main(String[] args) {
         Node linkList = createLinkList(10);
         printList(linkList);
@@ -90,6 +106,10 @@ public class LinkList {
 
         Node list = reverseBetween(asc, 4, 6);
         printList(list);
+
+        // 找出倒数第k个元素
+        Node node = findKthToTail(linkList, 3);
+        System.out.println(node.value);
     }
 
 }
