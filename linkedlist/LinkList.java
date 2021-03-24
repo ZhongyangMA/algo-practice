@@ -81,10 +81,11 @@ public class LinkList {
     }
 
     // 找出倒数第K个节点
-    public static Node findKthToTail(Node head, int k) {
+    public static Node findKthToTail(Node pHead, int k) {
         //双指针法 p1跑k-1步时 放出p2 p1跑到底时p2指向倒数第k个节点
-        Node p1 = head;
-        Node p2 = head;
+        if(pHead == null || k == 0) return null;
+        Node p1 = pHead;
+        Node p2 = pHead;
         int count = 1;
         while(p1.next != null) {
             p1 = p1.next;
@@ -93,6 +94,7 @@ public class LinkList {
                 p2 = p2.next;
             }
         }
+        if(k > count) return null;
         return p2;
     }
 
